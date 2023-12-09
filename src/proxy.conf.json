@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://interview.community",
+    "secure": false
+  }
+}
