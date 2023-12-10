@@ -1,3 +1,7 @@
 @for (question of questions(); track question.id) {
-  <app-question-item [question]="question"/>
+  @defer (on viewport) {
+    <app-question-item [question]="question" (loaded)="loaded($event)"/>
+  } @placeholder {
+    <div>loading...</div>
+  }
 }

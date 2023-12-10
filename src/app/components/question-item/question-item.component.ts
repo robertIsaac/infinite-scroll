@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Question } from '../../interfaces/question';
 import { JsonPipe } from '@angular/common';
 
@@ -11,6 +11,11 @@ import { JsonPipe } from '@angular/common';
   templateUrl: './question-item.component.html',
   styleUrl: './question-item.component.scss'
 })
-export class QuestionItemComponent {
+export class QuestionItemComponent implements OnInit {
   @Input({required: true}) question!: Question;
+  @Output() loaded = new EventEmitter<number>();
+
+  ngOnInit() {
+    this.loaded.emit(this.question.id);
+  }
 }

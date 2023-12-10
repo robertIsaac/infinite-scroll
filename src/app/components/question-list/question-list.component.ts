@@ -12,7 +12,7 @@ import { QuestionItemComponent } from '../question-item/question-item.component'
     QuestionItemComponent,
   ],
   templateUrl: './question-list.component.html',
-  styleUrl: './question-list.component.scss'
+  styleUrl: './question-list.component.scss',
 })
 export class QuestionListComponent {
   protected readonly questions = signal<Question[]>([]);
@@ -28,8 +28,14 @@ export class QuestionListComponent {
 
       this.questions.update(oldQuestions => {
         return [...oldQuestions, ...questions.data];
-      })
-    })
+      });
+    });
   }
 
+  loaded(id: number) {
+    if (this.questions().length < this.total && this.questions().at(-2)?.id === id) {
+      this.loadQuestions(this.questions().length / 5);
+    }
+  }
 }
+
